@@ -1,0 +1,12 @@
+data/
+*.parquet
+
+outputs/od_matrices/normalized_trips.csv
+outputs/od_matrices/od_matrix.csv
+outputs/od_matrices/top_corridors.csv
+
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+
+

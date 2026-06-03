@@ -1,0 +1,20 @@
+
+=============================
+VISITOR_HOME_CBGS MISSINGNESS REPORT
+=============================
+
+Total POI rows: 156,672
+
+Missing VISITOR_HOME_CBGS rows: 40,002
+Valid rows: 116,670
+% rows missing: 25.53%
+
+-----------------------------
+
+Total VISITOR_COUNTS (trips): 242,546,581
+
+Excluded trips (missing CBG): 9,352,601
+Included trips: 233,193,980
+% trips excluded: 3.86%
+
+=============================
