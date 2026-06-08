@@ -1,78 +1,73 @@
 import pandas as pd
-import numpy as np
 import json
-import os
+from pathlib import Path
 
-# =================================================
-# 1. LOAD DATA
-# =================================================
-file_path = "data/raw/export_1/2026-03-02--data_01c4ac48-0309-1cae-0042-fa0708e04496_008_4_0.snappy.parquet"
-df = pd.read_parquet(file_path)
+# --------------------------------------------------
+# LOAD DATA
+# --------------------------------------------------
+
+FILE_PATH = "data/raw/export_1/2026-03-02--data_01c4ac48-0309-1cae-0042-fa0708e04496_008_4_0.snappy.parquet"
+
+df = pd.read_parquet(FILE_PATH)
 
 print("\n--- DATA LOADED ---")
 print("Rows:", len(df))
 print("Columns:", len(df.columns))
 
-# =================================================
-# 2. STEP 2: MISSING VISITOR_HOME_CBGS LOG
-# =================================================
-missing_home = df["VISITOR_HOME_CBGS"].isna().sum()
-total = len(df)
+# --------------------------------------------------
+# DATA QUALITY CHECK
+# --------------------------------------------------
+
+missing = df["VISITOR_HOME_CBGS"].isna().sum()
 
 print("\n--- DATA QUALITY LOG ---")
-print("Missing VISITOR_HOME_CBGS:", missing_home)
-print("Percent missing:", round(100 * missing_home / total, 2), "%")
+print("Missing VISITOR_HOME_CBGS:", missing)
+print("Percent missing:", round(missing / len(df) * 100, 2), "%")
 
-excluded_visitors = df.loc[df["VISITOR_HOME_CBGS"].isna(), "VISIT_COUNTS"].sum()
-total_visitors = df["VISIT_COUNTS"].sum()
+# --------------------------------------------------
+# BUILD OD MATRIX
+# --------------------------------------------------
 
-print("Excluded visitors:", excluded_visitors)
-print("Percent excluded (by volume):", round(100 * excluded_visitors / total_visitors, 2), "%")
-
-# =================================================
-# 3. STEP 3: NORMALIZATION
-# =================================================
-coverage_rate = 0.30
-coverage_rate = float(coverage_rate)
-
-df["observed_trips"] = pd.to_numeric(df["VISIT_COUNTS"], errors="coerce")
-df = df.dropna(subset=["observed_trips"])
-
-df["adjusted_trips"] = df["observed_trips"].astype(float) / coverage_rate
-
-print("\n--- NORMALIZATION SUMMARY ---")
-print("Observed total:", df["observed_trips"].sum())
-print("Adjusted total:", df["adjusted_trips"].sum())
-
-# =================================================
-# 4. STEP 4: OD MATRIX BUILD
-# =================================================
-rows = []
+records = []
 
 for _, row in df.iterrows():
+
+    if pd.isna(row["VISITOR_HOME_CBGS"]):
+        continue
+
     try:
-        home_dict = json.loads(row["VISITOR_HOME_CBGS"])
-        poi = row["FOOTPRINT_ID"]
-
-        for origin_cbg, count in home_dict.items():
-            rows.append([origin_cbg, poi, count])
-
+        cbg_dict = json.loads(row["VISITOR_HOME_CBGS"])
     except Exception:
-        pass
+        continue
 
-od = pd.DataFrame(rows, columns=["origin_cbg", "poi", "visits"])
-od_matrix = od.groupby(["origin_cbg", "poi"])["visits"].sum().reset_index()
+    destination_id = row["PERSISTENT_ID"]
+    destination_name = row["LOCATION_NAME"]
 
-# =================================================
-# 5. EXPORTS
-# =================================================
-os.makedirs("outputs/od_matrices", exist_ok=True)
+    for origin, trips in cbg_dict.items():
 
-df.to_csv("outputs/od_matrices/normalized_trips.csv", index=False)
-od_matrix.to_csv("outputs/od_matrices/od_matrix.csv", index=False)
+        records.append({
+            "origin": str(origin),
+            "destination_id": str(destination_id),
+            "destination_name": str(destination_name),
+            "trips": float(trips)
+        })
+
+od = pd.DataFrame(records)
+
+print("\n--- TRIP SUMMARY ---")
+print("Estimated trips:", round(od["trips"].sum()))
+
+# --------------------------------------------------
+# EXPORT
+# --------------------------------------------------
+
+Path("outputs/od_matrices").mkdir(parents=True, exist_ok=True)
+
+od.to_csv(
+    "outputs/od_matrices/od_matrix.csv",
+    index=False
+)
 
 print("\n--- EXPORT COMPLETE ---")
-print("Normalized trips saved")
 print("OD matrix saved")
-print("OD rows:", len(od_matrix))
-
+print("OD rows:", len(od))
