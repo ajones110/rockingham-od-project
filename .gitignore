@@ -8,5 +8,8 @@ outputs/od_matrices/top_corridors.csv
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+outputs/od_matrices/*.csv
 
+scripts/full_pipeline_backup.py
+scripts/full_pipeline_broken.py
 
