@@ -1,15 +1,30 @@
-data/
-*.parquet
-
-outputs/od_matrices/normalized_trips.csv
-outputs/od_matrices/od_matrix.csv
-outputs/od_matrices/top_corridors.csv
-
+# =========================
+# Python
+# =========================
 __pycache__/
+*.pyc
 .ipynb_checkpoints/
 .DS_Store
-outputs/od_matrices/*.csv
 
+# =========================
+# Environment / notebooks
+# =========================
+*.parquet
+
+# =========================
+# Data (raw GIS inputs)
+# =========================
+data/
+data/shapefiles/
+
+# =========================
+# Outputs (generated files)
+# =========================
+outputs/
+*.geojson
+
+# =========================
+# Scripts (optional cleanup)
+# =========================
 scripts/full_pipeline_backup.py
 scripts/full_pipeline_broken.py
-
