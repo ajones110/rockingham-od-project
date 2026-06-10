@@ -1,154 +1,187 @@
-# Rockingham County Mobility Analysis: Origin-Destination Matrix Development
+# Rockingham County OD Matrix & Digital Twin Research
 
 ## Overview
 
-This project develops Origin-Destination (OD) matrices from Dewey Data Weekly Patterns mobility data for Rockingham County, North Carolina.
+This project develops a transportation and community connectivity framework for Rockingham County, North Carolina.
 
-The workflow converts raw visitor home Census Block Group (CBG) data into planning-ready travel flows that can support:
+The workflow combines:
 
-* Transportation planning
-* Regional mobility analysis
-* Travel demand assessment
-* Digital twin development
-* Community technology readiness research
-* Economic and regional development studies
+* Census Block Groups (CBGs)
+* Census Place Boundaries
+* ACS Demographic Data
+* GIS Analysis
+* Gravity-Based Origin-Destination Modeling
 
-This work is being conducted as part of graduate research investigating community readiness and mobility patterns in rural regions.
-
----
-
-## Data Source
-
-The analysis uses Dewey Data Weekly Patterns Plus mobility datasets.
-
-Key fields include:
-
-* VISITOR_HOME_CBGS
-* POI_CBG
-* LOCATION_NAME
-* VISITOR_COUNTS
-* VISIT_COUNTS
-
-The Dewey dataset already contains normalized visit estimates, so no additional device-sample expansion factors are applied.
+The long-term goal is to support rural transportation planning, digital twin development, and community technology readiness assessment.
 
 ---
 
-## Workflow
+## Study Area
 
-### 1. Load Weekly Patterns Data
+Rockingham County, North Carolina
 
-Raw Weekly Patterns files are loaded from Dewey exports.
+Primary municipalities include:
 
-### 2. Parse Visitor Home CBGs
+* Reidsville
+* Eden
+* Wentworth
+* Madison
+* Mayodan
+* Stoneville
 
-The VISITOR_HOME_CBGS field contains JSON-formatted home Census Block Group counts.
+---
 
-Example:
+## Project Workflow
 
-```json
-{
-  "370459510002": 290,
-  "370459515032": 194
-}
-```
+### 1. Census Geography Processing
 
-These records are expanded into individual origin-destination flows.
+Downloaded:
 
-### 3. Build OD Matrix
+* TIGER/Line Block Groups
+* TIGER/Line Place Boundaries
 
-Each home CBG is linked to a destination POI.
+Generated:
+
+* CBG centroids
+* Municipality assignments
 
 Output:
 
-```text
-Origin CBG → Destination → Trips
-```
+data/cbg_place_enriched.geojson
 
-### 4. County Crosswalk
+---
 
-Origin CBGs are converted to county FIPS codes and county names.
+### 2. Municipality Assignment
+
+Each Census Block Group was assigned to a municipality using:
+
+1. Spatial join
+2. Nearest-place fallback assignment
+
+Final output:
+
+outputs/rockingham_cbg_places.geojson
+
+Result:
+
+* 70 Rockingham County CBGs
+* 100% municipality assignment coverage
+
+---
+
+### 3. ACS Demographic Integration
+
+Variables:
+
+* Total Population (B01003_001E)
+* Median Household Income (B19013_001E)
+
+Source:
+
+American Community Survey 5-Year Estimates
 
 Output:
 
-```text
-Origin County → Destination → Trips
-```
-
-### 5. Corridor Analysis
-
-Travel corridors are aggregated to identify:
-
-* Top origin counties
-* Top destinations
-* Major regional travel flows
-
-### 6. Export Planning Outputs
-
-Outputs are saved for visualization and further analysis.
+outputs/rockingham_acs.csv
 
 ---
 
-## Repository Structure
+### 4. Gravity Model OD Matrix
 
-```text
-scripts/
-│
-├── full_pipeline.py
-├── cbg_to_county.py
-├── county_destination_flows.py
-├── top_corridors_county.py
-├── top_counties.py
-├── top_destinations.py
+Synthetic interaction model:
 
-outputs/
-│
-├── figures/
-├── logs/
-└── od_matrices/
+Trips ∝ (Population_i × Population_j) / Distance_ij²
 
-data/
-│
-└── crosswalk/
-```
+Generated:
+
+outputs/rockingham_od_population_weighted.csv
+
+Characteristics:
+
+* Population-weighted
+* Distance-decay adjusted
+* Internal and inter-community flows
 
 ---
 
-## Key Outputs
+### 5. Municipality Aggregation
 
-### OD Matrix
+CBG-level flows aggregated to municipality-to-municipality flows.
 
-```text
-origin
-destination_name
-trips
-```
+Output:
 
-### County Flow Matrix
+outputs/rockingham_place_od.csv
 
-```text
-origin_county
-destination_name
-trips
-```
+Example Results:
 
-### Top Destinations
+Reidsville → Reidsville
 
-Aggregated visitor volumes by destination.
+Eden → Eden
 
-### County-Destination Corridors
+Reidsville ↔ Wentworth
 
-Largest travel flows connecting counties and destinations.
+Eden ↔ Reidsville
+
+Eden ↔ Stoneville
+
+---
+
+### 6. Corridor Analysis
+
+Top travel corridors identified by combining directional flows.
+
+Output:
+
+outputs/top_10_corridors.csv
+
+Top Corridors:
+
+1. Reidsville ↔ Wentworth
+2. Eden ↔ Reidsville
+3. Eden ↔ Stoneville
+4. Eden ↔ Wentworth
+5. Madison ↔ Mayodan
+
+---
+
+### 7. Flow Mapping
+
+Municipality centroids were connected using weighted OD flows.
+
+Output:
+
+outputs/figures/place_flow_map.png
+
+Visualization highlights:
+
+* Reidsville as the primary county hub
+* Eden as a secondary hub
+* Strong Eden–Stoneville corridor
+* Strong Reidsville–Wentworth corridor
+
+---
+
+## Current Research Applications
+
+This workflow supports:
+
+* Transportation Planning
+* Regional Development Analysis
+* Rural Accessibility Studies
+* Digital Twin Development
+* Community Technology Readiness Assessment
 
 ---
 
 ## Future Enhancements
 
-* County flow maps
-* CBG place-name enrichment
-* Regional travel shed analysis
-* Activity-center classification
-* Digital twin integration
-* Transportation accessibility analysis
+Planned additions:
+
+* LODES Employment Data
+* OpenStreetMap Travel Times
+* SUMO Network Simulation
+* TAP-B Integration
+* NeuralMOVES Demand Modeling
 
 ---
 
@@ -156,6 +189,7 @@ Largest travel flows connecting counties and destinations.
 
 Akilah Jones
 
-M.S. Civil Engineering
+M.S. Civil Engineering 
 
-North Carolina Agricultural & Technical State University
+North Carolina A&T State University
+
