@@ -1,18 +1,16 @@
-# Rockingham County OD Matrix & Digital Twin Research
+# Rockingham County OD Matrix & Mobility Patterns
 
 ## Overview
 
-This project develops a transportation and community connectivity framework for Rockingham County, North Carolina.
+This project looks at how people move within Rockingham County, North Carolina using Census Block Groups (CBGs), place boundaries, and mobility data.
 
-The workflow combines:
+The goal is to understand real movement patterns between towns like Eden, Reidsville, Wentworth, Madison, and Mayodan, and use that to support transportation planning and regional development work.
 
-* Census Block Groups (CBGs)
-* Census Place Boundaries
-* ACS Demographic Data
-* GIS Analysis
-* Gravity-Based Origin-Destination Modeling
+Instead of relying only on synthetic models, this project builds both:
+- a gravity-based OD model
+- an observed mobility-based OD matrix
 
-The long-term goal is to support rural transportation planning, digital twin development, and community technology readiness assessment.
+to compare how predicted movement differs from real behavior.
 
 ---
 
@@ -20,176 +18,114 @@ The long-term goal is to support rural transportation planning, digital twin dev
 
 Rockingham County, North Carolina
 
-Primary municipalities include:
-
-* Reidsville
-* Eden
-* Wentworth
-* Madison
-* Mayodan
-* Stoneville
+Key municipalities:
+- Eden  
+- Reidsville  
+- Wentworth  
+- Madison  
+- Mayodan  
+- Stoneville  
 
 ---
 
-## Project Workflow
+## Data Used
 
-### 1. Census Geography Processing
+- Census Block Groups (TIGER/Line)
+- Census Place Boundaries
+- American Community Survey (5-year estimates)
+- Dewey mobility dataset (weekly aggregated patterns)
+- GIS spatial joins and centroid calculations
 
-Downloaded:
+---
 
-* TIGER/Line Block Groups
-* TIGER/Line Place Boundaries
+## Workflow
 
-Generated:
-
-* CBG centroids
-* Municipality assignments
+### 1. Building the spatial foundation
+CBG geometries were processed and matched to municipalities using spatial joins and nearest-neighbor assignment where needed.
 
 Output:
-
-data/cbg_place_enriched.geojson
-
----
-
-### 2. Municipality Assignment
-
-Each Census Block Group was assigned to a municipality using:
-
-1. Spatial join
-2. Nearest-place fallback assignment
-
-Final output:
-
-outputs/rockingham_cbg_places.geojson
-
-Result:
-
-* 70 Rockingham County CBGs
-* 100% municipality assignment coverage
+- `data/cbg_place_enriched.geojson`
 
 ---
 
-### 3. ACS Demographic Integration
-
-Variables:
-
-* Total Population (B01003_001E)
-* Median Household Income (B19013_001E)
-
-Source:
-
-American Community Survey 5-Year Estimates
+### 2. Demographic integration
+ACS data was added at the CBG level, including:
+- population
+- median household income
 
 Output:
-
-outputs/rockingham_acs.csv
-
----
-
-### 4. Gravity Model OD Matrix
-
-Synthetic interaction model:
-
-Trips ∝ (Population_i × Population_j) / Distance_ij²
-
-Generated:
-
-outputs/rockingham_od_population_weighted.csv
-
-Characteristics:
-
-* Population-weighted
-* Distance-decay adjusted
-* Internal and inter-community flows
+- `outputs/rockingham_acs.csv`
 
 ---
 
-### 5. Municipality Aggregation
+### 3. Gravity model (baseline comparison)
+A simple gravity model was used to estimate expected flows:
 
-CBG-level flows aggregated to municipality-to-municipality flows.
+Trips increase with population and decrease with distance.
 
 Output:
-
-outputs/rockingham_place_od.csv
-
-Example Results:
-
-Reidsville → Reidsville
-
-Eden → Eden
-
-Reidsville ↔ Wentworth
-
-Eden ↔ Reidsville
-
-Eden ↔ Stoneville
+- `outputs/rockingham_od_population_weighted.csv`
 
 ---
 
-### 6. Corridor Analysis
+### 4. Observed OD construction
+Mobility data was processed at the CBG level and expanded into home-to-POI flows.
 
-Top travel corridors identified by combining directional flows.
+These were then aggregated into municipality-level flows.
 
 Output:
-
-outputs/top_10_corridors.csv
-
-Top Corridors:
-
-1. Reidsville ↔ Wentworth
-2. Eden ↔ Reidsville
-3. Eden ↔ Stoneville
-4. Eden ↔ Wentworth
-5. Madison ↔ Mayodan
+- `rockingham_place_od.csv`
 
 ---
 
-### 7. Flow Mapping
-
-Municipality centroids were connected using weighted OD flows.
+### 5. Corridor analysis
+Major movement corridors were identified by ranking OD flows between municipalities.
 
 Output:
-
-outputs/figures/place_flow_map.png
-
-Visualization highlights:
-
-* Reidsville as the primary county hub
-* Eden as a secondary hub
-* Strong Eden–Stoneville corridor
-* Strong Reidsville–Wentworth corridor
+- `outputs/top_10_corridors.csv`
 
 ---
 
-## Current Research Applications
+### 6. Flow mapping
+Municipality centroids were connected using weighted flows to visualize dominant travel patterns across the county.
 
-This workflow supports:
-
-* Transportation Planning
-* Regional Development Analysis
-* Rural Accessibility Studies
-* Digital Twin Development
-* Community Technology Readiness Assessment
+Output:
+- `outputs/figures/place_flow_map.png`
 
 ---
 
-## Future Enhancements
+## Key Patterns
 
-Planned additions:
+- Eden and Reidsville act as the primary mobility hubs in the county  
+- Strong two-way flow between Eden and Reidsville  
+- Wentworth behaves as a feeder zone into Reidsville  
+- Movement is highly localized, with strong internal town flows dominating overall mobility  
 
-* LODES Employment Data
-* OpenStreetMap Travel Times
-* SUMO Network Simulation
-* TAP-B Integration
-* NeuralMOVES Demand Modeling
+---
+
+## Applications
+
+This work supports:
+- transportation planning
+- rural mobility analysis
+- regional accessibility studies
+- digital twin development
+- community planning and infrastructure decisions
+
+---
+
+## Future Work
+
+- LODES employment integration  
+- OpenStreetMap travel times  
+- SUMO traffic simulation  
+- TAP-B modeling  
+- Neural MOVES demand modeling  
 
 ---
 
 ## Author
 
-Akilah Jones
-
-M.S. Civil Engineering 
-
-North Carolina A&T State University
-
+Akilah Jones  
+M.S. Civil Engineering  
+North Carolina A&T State University  
