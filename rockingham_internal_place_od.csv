@@ -1,0 +1,198 @@
+home_place,poi_place,visits,flow_share
+Eden,Eden,1262185,0.8789980890513226
+Reidsville,Reidsville,901112,0.8749229318800349
+Wentworth,Reidsville,173411,0.6283394267038187
+Eden,Reidsville,133742,0.0931392485458962
+Madison,Madison,129535,0.7507447462067207
+Reidsville,Eden,97712,0.09487219071531837
+Greensboro,Reidsville,97375,0.6968148672921005
+Wentworth,Eden,64980,0.2354492849197233
+Mayodan,Madison,64315,0.5217916889775918
+Mayodan,Mayodan,45702,0.3707832351652631
+Wentworth,Wentworth,28584,0.10357159680125225
+Madison,Mayodan,27352,0.1585237217604989
+Greensboro,Eden,26588,0.19026355524069183
+Eden,Madison,20827,0.01450412831769661
+Reidsville,Wentworth,19899,0.0193206742574517
+Madison,Eden,12569,0.0728460316908347
+Greensboro,Madison,11911,0.08523503860658495
+Eden,Wentworth,10772,0.0075017270964722665
+Burlington,Reidsville,9651,0.8723673506282202
+Mayodan,Eden,9169,0.0743886806535884
+Eden,Mayodan,8410,0.005856806988612306
+Reidsville,Madison,8176,0.007938380457757932
+Wentworth,Madison,7526,0.02726979560335238
+Stokesdale,Madison,5934,0.4873521681997372
+Summerfield,Reidsville,5582,0.43476906301113794
+Winston-Salem,Madison,3816,0.3479212253829322
+Summerfield,Madison,3502,0.27276267622088946
+High Point,Reidsville,3292,0.5716270185796145
+Stokesdale,Reidsville,3216,0.26412614980289095
+Yanceyville,Reidsville,3210,0.8057228915662651
+Summerfield,Eden,3049,0.23747955448243632
+Reidsville,Mayodan,3034,0.0029458226894370798
+Mayodan,Reidsville,2952,0.023949763909847637
+Winston-Salem,Eden,2889,0.26340262582056895
+Winston-Salem,Reidsville,2764,0.25200583515681985
+Greensboro,Mayodan,2720,0.01946430232641349
+Oak Ridge,Madison,2673,0.5813397129186603
+Madison,Reidsville,2330,0.013503958456491752
+Altamahaw,Reidsville,2254,0.8073065902578797
+Caswell Beach,Eden,1843,0.7622001654259719
+Concord,Reidsville,1597,0.9608904933814681
+Kernersville,Madison,1571,0.3354687166346359
+Stokesdale,Eden,1494,0.12270039421813403
+Wentworth,Mayodan,1482,0.005369895971853339
+Winston-Salem,Mayodan,1358,0.12381473377097009
+Mebane,Reidsville,1335,0.9556191839656406
+Stokesdale,Mayodan,1324,0.10873850197109067
+Oak Ridge,Reidsville,1211,0.263375380600261
+Greensboro,Wentworth,1149,0.008222236534209226
+High Point,Eden,1148,0.19934016322278172
+Mayodan,Wentworth,1120,0.009086631293709131
+Kernersville,Mayodan,949,0.2026478752936152
+Graham,Reidsville,943,0.7525937749401437
+Moravian Falls,Madison,880,0.8585365853658536
+High Point,Madison,830,0.14412224344504254
+Burlington,Eden,825,0.07457290065985718
+Raleigh,Reidsville,808,0.5846599131693199
+Yanceyville,Eden,774,0.19427710843373494
+Kernersville,Eden,764,0.1631432842195174
+Glen Raven,Reidsville,757,0.9805699481865285
+Madison,Wentworth,756,0.004381541885453977
+Charlotte,Reidsville,738,0.6186085498742665
+Kernersville,Reidsville,717,0.15310698270339526
+Kernersville,Wentworth,682,0.14563314114883621
+Summerfield,Mayodan,652,0.05078277124386635
+Topsail Beach,Eden,620,0.9733124018838305
+Clemmons,Reidsville,567,1.0
+Archdale,Reidsville,551,1.0
+Altamahaw,Eden,538,0.19269340974212035
+Caswell Beach,Madison,530,0.21918941273779982
+Durham,Reidsville,513,0.9808795411089866
+Raleigh,Eden,508,0.3675832127351664
+Burlington,Wentworth,505,0.04564765434330652
+Forest Oaks,Reidsville,491,1.0
+High Point,Mayodan,489,0.08491057475256121
+Rocky Mount,Eden,468,0.624
+Tobaccoville,Reidsville,417,0.8580246913580247
+Lake Norman of Catawba,Eden,384,1.0
+McLeansville,Reidsville,374,0.7465069860279441
+Spencer,Eden,367,0.716796875
+Kill Devil Hills,Madison,366,1.0
+Oak Ridge,Eden,358,0.07785993910395825
+Oak Ridge,Mayodan,333,0.0724227925184863
+Asheboro,Reidsville,313,1.0
+Graham,Eden,310,0.24740622505985635
+Boone,Eden,305,0.8789625360230547
+Wilmington,Reidsville,295,0.7824933687002652
+Roxboro,Reidsville,294,1.0
+Elon,Reidsville,290,1.0
+Lewisville,Madison,283,0.7753424657534247
+Rocky Mount,Reidsville,282,0.376
+Salisbury,Eden,239,0.8327526132404182
+Mount Airy,Reidsville,237,0.8088737201365188
+Lowesville,Eden,229,1.0
+Cherokee,Reidsville,223,1.0
+King,Eden,211,0.36695652173913046
+Stokesdale,Wentworth,208,0.017082785808147174
+Chapel Hill,Eden,205,0.6655844155844156
+Charlotte,Madison,191,0.1601005867560771
+Gibsonville,Reidsville,188,1.0
+King,Mayodan,188,0.3269565217391304
+Fayetteville,Eden,186,0.7848101265822784
+Charlotte,Eden,183,0.1533948030176027
+Smithfield,Eden,181,0.9890710382513661
+Wilson,Reidsville,163,0.573943661971831
+King,Madison,157,0.27304347826086955
+Oak Island,Reidsville,154,0.4117647058823529
+Moravian Falls,Mayodan,145,0.14146341463414633
+Spencer,Reidsville,145,0.283203125
+Welcome,Reidsville,142,0.9102564102564102
+Winston-Salem,Wentworth,141,0.012855579868708972
+Hickory,Madison,141,0.7268041237113402
+Southern Pines,Reidsville,140,1.0
+Rural Hall,Madison,123,1.0
+Wilson,Eden,121,0.426056338028169
+Lexington,Madison,117,1.0
+Trinity,Reidsville,115,0.7142857142857143
+Havelock,Eden,109,1.0
+Conover,Eden,109,0.8014705882352942
+Kannapolis,Reidsville,105,0.7394366197183099
+Chapel Hill,Reidsville,103,0.3344155844155844
+Cricket,Reidsville,90,1.0
+China Grove,Mayodan,90,1.0
+Thomasville,Reidsville,88,0.5238095238095238
+Asheville,Reidsville,88,1.0
+Oak Island,Madison,86,0.22994652406417113
+Greenville,Reidsville,82,1.0
+Lewisville,Reidsville,82,0.22465753424657534
+Wilmington,Eden,82,0.21750663129973474
+Burlington,Madison,82,0.007412094368616107
+Charlotte,Mayodan,81,0.06789606035205364
+Pleasant Garden,Reidsville,81,0.46551724137931033
+Thomasville,Eden,80,0.47619047619047616
+Calabash,Eden,80,1.0
+McLeansville,Madison,76,0.15169660678642716
+Oak Island,Eden,74,0.19786096256684493
+Cary,Reidsville,72,0.96
+Youngsville,Eden,70,1.0
+Raleigh,Madison,66,0.04775687409551375
+Buies Creek,Eden,62,1.0
+Mebane,Eden,62,0.04438081603435934
+Pinehurst,Mayodan,60,0.6185567010309279
+Oak Island,Mayodan,60,0.16042780748663102
+Pleasant Hill,Reidsville,59,1.0
+Apex,Reidsville,59,1.0
+Jamestown,Reidsville,57,1.0
+Mount Airy,Eden,56,0.19112627986348124
+Pleasant Garden,Madison,55,0.3160919540229885
+Summerfield,Wentworth,54,0.004205935041669912
+Hickory,Reidsville,53,0.27319587628865977
+Garner,Reidsville,53,0.8412698412698413
+McLeansville,Eden,51,0.10179640718562874
+Concord,Eden,51,0.030685920577617327
+Buxton,Madison,51,1.0
+Fayetteville,Madison,51,0.21518987341772153
+Morrisville,Eden,51,1.0
+Tobaccoville,Eden,50,0.102880658436214
+Salisbury,Reidsville,48,0.1672473867595819
+Trinity,Madison,46,0.2857142857142857
+Caswell Beach,Reidsville,45,0.018610421836228287
+Kitty Hawk,Eden,43,1.0
+Boone,Madison,42,0.12103746397694524
+Matthews,Reidsville,40,1.0
+Rougemont,Eden,40,1.0
+Holden Beach,Reidsville,39,1.0
+Pleasant Garden,Wentworth,38,0.21839080459770116
+Gamewell,Madison,37,1.0
+Kannapolis,Madison,37,0.2605633802816901
+Pinehurst,Madison,37,0.38144329896907214
+Badin,Reidsville,35,1.0
+Carolina Beach,Reidsville,31,1.0
+Conover,Reidsville,27,0.19852941176470587
+Oak Ridge,Wentworth,23,0.005002174858634189
+Ayden,Eden,22,1.0
+Statesville,Reidsville,22,1.0
+Tobaccoville,Madison,19,0.03909465020576132
+King,Reidsville,19,0.03304347826086956
+Midway,Reidsville,18,1.0
+Topsail Beach,Reidsville,17,0.026687598116169546
+Walkertown,Madison,16,1.0
+Glen Raven,Madison,15,0.019430051813471502
+Pine Knoll Shores,Madison,15,1.0
+Hope Mills,Madison,14,1.0
+Zebulon,Reidsville,14,1.0
+Welcome,Eden,14,0.08974358974358974
+Concord,Madison,14,0.00842358604091456
+Garner,Madison,10,0.15873015873015872
+Wallburg,Madison,10,1.0
+Gastonia,Madison,10,1.0
+Durham,Madison,10,0.019120458891013385
+Cary,Eden,3,0.04
+Four Oaks,Reidsville,2,1.0
+Pittsboro,Reidsville,2,1.0
+Smithfield,Reidsville,2,0.01092896174863388
+Forest City,Reidsville,1,1.0
+Vanceboro,Reidsville,1,1.0
+Shelby,Reidsville,1,1.0
