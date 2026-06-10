@@ -1,46 +1,44 @@
-od = pd.DataFrame(rows, columns=["origin_cbg", "destination_poi", "trips"])
+import pandas as pd
 
-# Rename for clarity (clean reporting names)
-od = od.rename(columns={
-    "origin_cbg": "origin",
-    "destination_poi": "destination"
-})import pandas as pd
-import json
-
-df = pd.read_parquet(
-    "data/raw/export_1/2026-03-02--data_01c4ac48-0309-1cae-0042-fa0708e04496_008_4_0.snappy.parquet"
+# Load place OD matrix
+od = pd.read_csv(
+    "outputs/rockingham_place_od.csv"
 )
 
-rows = []
+# Remove internal trips
+od = od[
+    od["origin_place"] != od["destination_place"]
+]
 
-for _, row in df.iterrows():
-    try:
-        home_dict = json.loads(row["VISITOR_HOME_CBGS"])
-        poi = row["PERSISTENT_ID_STORE"]
-
-        for origin, count in home_dict.items():
-            rows.append([origin, poi, count])
-
-    except Exception:
-        pass
-
-od = pd.DataFrame(rows, columns=["origin_cbg", "destination_poi", "trips"])
-
-# --- TOP CORRIDORS ---
-top_corridors = (
-    od.groupby(["origin_cbg", "destination_poi"])["trips"]
-    .sum()
-    .reset_index()
-    .sort_values("trips", ascending=False)
+# Create undirected corridor names
+od["corridor"] = od.apply(
+    lambda row: " <-> ".join(
+        sorted([
+            row["origin_place"],
+            row["destination_place"]
+        ])
+    ),
+    axis=1
 )
 
-print("\n--- TOP 20 CORRIDORS ---")
-print(top_corridors.head(20))
+# Aggregate both directions
+corridors = (
+    od.groupby("corridor", as_index=False)
+      .agg({"trips": "sum"})
+      .sort_values(
+          "trips",
+          ascending=False
+      )
+)
 
-top_corridors.head(50).to_csv(
-    "outputs/od_matrices/top_corridors.csv",
+print("\nTOP CORRIDORS\n")
+print(corridors.head(20))
+
+corridors.to_csv(
+    "outputs/top_10_corridors.csv",
     index=False
 )
 
-print("\nSaved: outputs/od_matrices/top_corridors.csv")
-
+print(
+    "\nSaved outputs/top_10_corridors.csv"
+)
